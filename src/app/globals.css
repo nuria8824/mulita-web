@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -13,13 +10,10 @@
 :root {
   --background: #ffffff;
   --foreground: #151515;
-
-  /* Colores Mulita */
-  --primary: #003C71; /* Azul UAP */
+  --primary: #003C71;   /* Azul UAP */
   --secondary: #FEDD00; /* Amarillo UAP */
-  --muted: #706F6F; /* Gris UAP */
 }
 
-body {
-  @apply bg-background text-foreground;
+@layer base {
+  body { @apply bg-background text-foreground; }
 }
