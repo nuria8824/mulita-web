@@ -15,6 +15,16 @@
   --secondary: #FEDD00; /* Amarillo UAP */
 }
 
+:root {
+  /* ... tus otros colores ... */
+  --border-light: #e5e7eb; /* gris claro */
+}
+
+.border-light {
+  border-color: var(--border-light);
+}
+
+
 /* Base */
 @layer base {
   body { @apply bg-background text-foreground; }

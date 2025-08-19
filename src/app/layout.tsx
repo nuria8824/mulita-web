@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 href="/auth/login"
                 className="btn btn--blue"
               >
-                LogIn
+                Log In
               </Link>
 
               <button
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </p>
               <Link
                 href="/comunidad"
-                className="mt-4 inline-block rounded-md bg-secondary text-secondary-foreground px-3 py-1.5 font-semibold"
+                className="btn btn--yellow mt-4"
               >
                 ¡Únete!
               </Link>

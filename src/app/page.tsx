@@ -86,7 +86,7 @@ export default function HomePage() {
       {/* BLOQUE INFO - público general */}
       <section className="mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-8">
-          <div className="rounded-2xl border border-border p-6">
+          <div className="rounded-2xl border border-light p-6">
             <h3 className="text-xl font-bold">Aprender con Mulita</h3>
             <p className="mt-3 text-muted-foreground">
               Mulita es un <strong>robot programable</strong> sencillo de usar, ideal para iniciar a
@@ -225,7 +225,7 @@ export default function HomePage() {
           <div className="mt-8 flex justify-center">
             <Link
               href="/tienda"
-              className="rounded-lg bg-primary text-white px-4 py-2 font-semibold hover:brightness-110"
+              className="btn btn--blue"
             >
               Ver todos los productos
             </Link>
