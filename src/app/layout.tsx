@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className="">
       <body className="bg-background text-foreground">
         {/* Top bar */}
-        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-border">
+        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-light">
           <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             {/* Brand */}
             <div className="flex items-center gap-3">

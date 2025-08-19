@@ -154,7 +154,7 @@ export default function HomePage() {
             {posts.map((p) => (
               <article
                 key={p.id}
-                className="rounded-xl border border-border bg-card p-5 hover:shadow-sm transition"
+                className="rounded-xl border border-light bg-card p-5 hover:shadow-sm transition"
               >
                 <div className="aspect-video rounded-lg bg-muted/70 grid place-items-center text-sm text-muted-foreground">
                   📄
@@ -198,7 +198,7 @@ export default function HomePage() {
             {products.map((p) => (
               <div
                 key={p.id}
-                className="rounded-xl border border-border bg-card p-5 flex flex-col"
+                className="rounded-xl border border-light bg-card p-5 flex flex-col"
               >
                 <div className="aspect-square rounded-lg bg-muted/70 grid place-items-center text-sm text-muted-foreground">
                   🛒
@@ -236,7 +236,7 @@ export default function HomePage() {
       {/* FAQ breve / CTA final */}
       <section className="mt-24 mb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
-          <div className="rounded-xl border border-border p-6">
+          <div className="rounded-xl border border-light p-6">
             <h3 className="text-lg font-bold">¿Para quién es?</h3>
             <p className="mt-3 text-muted-foreground">
               Visitantes que quieren conocer el proyecto, <strong>docentes</strong> que buscan
@@ -244,7 +244,7 @@ export default function HomePage() {
               desean adquirir el kit o piezas.
             </p>
           </div>
-          <div className="rounded-xl border border-border p-6">
+          <div className="rounded-xl border border-light p-6">
             <h3 className="text-lg font-bold">¿Cómo se compra?</h3>
             <p className="mt-3 text-muted-foreground">
               Seleccionás productos, confirmás tus datos y el sistema genera una
@@ -252,7 +252,7 @@ export default function HomePage() {
               coordinamos el pago por ese medio.
             </p>
           </div>
-          <div className="rounded-xl border border-border p-6">
+          <div className="rounded-xl border border-light p-6">
             <h3 className="text-lg font-bold">Idiomas</h3>
             <p className="mt-3 text-muted-foreground">
               La plataforma está disponible en <strong>español</strong>, <strong>portugués</strong> e
