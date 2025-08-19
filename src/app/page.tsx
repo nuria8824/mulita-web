@@ -104,7 +104,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="rounded-2xl border border-border p-6">
+          <div className="rounded-2xl border border-light p-6">
             <h3 className="text-xl font-bold">Comunidad educativa</h3>
             <p className="mt-3 text-muted-foreground">
               Registrate para <strong>subir actividades</strong> (texto, PDF, imágenes o video),
@@ -122,7 +122,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="rounded-2xl border border-border p-6">
+          <div className="rounded-2xl border border-light p-6">
             <h3 className="text-xl font-bold">Tienda y pedido simple</h3>
             <p className="mt-3 text-muted-foreground">
               Mirá kits y piezas con precios, agregá al carrito y generá tu
