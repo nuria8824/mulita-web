@@ -56,18 +56,16 @@ export default function HomePage() {
               </p>
 
               <div className="mt-8 flex items-center gap-4">
-                <Link
-                  href="/comunidad"
-                  className="inline-flex items-center gap-2 rounded-xl bg-primary text-white px-5 py-3 font-semibold shadow-sm hover:brightness-110"
-                >
+                {/* Comunidad */}
+                <Link href="/comunidad" className="btn btn--blue">
                   Comunidad <span aria-hidden>→</span>
                 </Link>
-                <Link
-                  href="/tienda"
-                  className="inline-flex items-center rounded-xl bg-secondary text-secondary-foreground px-5 py-3 font-semibold ring-1 ring-[color:var(--uap-yellow)] hover:brightness-95"
-                >
+
+                {/* Ver Tienda */}
+                <Link href="/tienda" className="btn btn--outline">
                   Ver Tienda
                 </Link>
+
               </div>
             </div>
 
@@ -178,7 +176,7 @@ export default function HomePage() {
           <div className="mt-8 flex justify-center">
             <Link
               href="/noticias"
-              className="rounded-lg bg-primary text-white px-4 py-2 font-semibold hover:brightness-110"
+              className="btn btn--blue"
             >
               Ver todas las noticias
             </Link>
@@ -211,12 +209,13 @@ export default function HomePage() {
                 <div className="mt-3 flex items-center justify-between">
                   <span className="font-bold">${p.price}</span>
                   <div className="flex gap-2">
-                    <button className="rounded-md bg-secondary text-secondary-foreground px-3 py-1.5 text-sm font-semibold ring-1 ring-[color:var(--uap-yellow)]">
+                    <button className="btn btn--yellow btn-sm">
                       Comprar
                     </button>
-                    <button className="rounded-md px-3 py-1.5 text-sm font-semibold border border-border">
+                    <button className="btn btn--outline btn-sm">
                       Detalle
                     </button>
+
                   </div>
                 </div>
               </div>

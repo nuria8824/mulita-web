@@ -37,16 +37,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex items-center gap-3">
               <Link
                 href="/auth/register"
-                className="inline-flex items-center rounded-xl bg-secondary text-secondary-foreground px-4 py-2 font-semibold shadow-sm ring-1 ring-border hover:brightness-95"
+                className="btn btn--yellow"
               >
                 Registro
               </Link>
+
               <Link
                 href="/auth/login"
-                className="inline-flex items-center rounded-xl bg-primary text-white px-4 py-2 font-semibold shadow-sm hover:brightness-110"
+                className="btn btn--blue"
               >
                 LogIn
               </Link>
+
               <button
                 className="ml-1 inline-flex items-center gap-1 text-sm px-2 py-1 rounded-lg hover:bg-muted"
                 aria-label="Idioma"
