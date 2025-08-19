@@ -1,170 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* ===== Variant para dark con clase .dark en <html> o <body> ===== */
 @custom-variant dark (&:is(.dark *));
 
-/* ===== Mapeo de variables Tailwind v4 ===== */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ===== Paleta UAP =====
-   Azul UAP:     #003C71 (Pantone 541 C)
-   Amarillo UAP: #FEDD00 (Pantone Yellow C)
-   Gris UAP:     #706F6F (Cool Gray aproximado)
-============================================================== */
 :root {
-  /* Base */
-  --radius: 0.625rem;
-
-  /* Colores "marca" reutilizables */
-  --uap-blue: #003C71;
-  --uap-yellow: #FEDD00;
-  --uap-gray: #706F6F;
-
-  /* Superficies y texto (modo claro) */
   --background: #ffffff;
   --foreground: #151515;
 
-  --card: #ffffff;
-  --card-foreground: #151515;
-
-  --popover: #ffffff;
-  --popover-foreground: #151515;
-
-  /* Marca */
-  --primary: var(--uap-blue);
-  --primary-foreground: #ffffff;
-
-  --secondary: var(--uap-yellow);
-  --secondary-foreground: #0a0a0a;
-
-  --accent: color-mix(in oklab, var(--uap-yellow) 25%, white 75%);
-  --accent-foreground: #0a0a0a;
-
-  /* Estados y neutrales */
-  --muted: color-mix(in oklab, var(--uap-gray) 10%, white 90%);
-  --muted-foreground: color-mix(in oklab, var(--uap-gray) 70%, white 30%);
-
-  --destructive: #dc2626;
-
-  /* Bordes / inputs / focus */
-  --border: color-mix(in oklab, var(--uap-gray) 30%, white 70%);
-  --input: color-mix(in oklab, var(--uap-gray) 30%, white 70%);
-  --ring: color-mix(in oklab, var(--uap-blue) 60%, white 40%);
-
-  /* Gráficos sugeridos (coherentes con la paleta) */
-  --chart-1: var(--uap-blue);
-  --chart-2: #295e93; /* azul más claro */
-  --chart-3: var(--uap-yellow);
-  --chart-4: #b89f00; /* amarillo oscuro */
-  --chart-5: var(--uap-gray);
-
-  /* Sidebar */
-  --sidebar: #f9fafb;
-  --sidebar-foreground: #171717;
-  --sidebar-primary: var(--uap-blue);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: color-mix(in oklab, var(--uap-yellow) 20%, white 80%);
-  --sidebar-accent-foreground: #0a0a0a;
-  --sidebar-border: color-mix(in oklab, var(--uap-gray) 25%, white 75%);
-  --sidebar-ring: color-mix(in oklab, var(--uap-blue) 60%, white 40%);
+  /* Colores Mulita */
+  --primary: #003C71; /* Azul UAP */
+  --secondary: #FEDD00; /* Amarillo UAP */
+  --muted: #706F6F; /* Gris UAP */
 }
 
-/* ===== Dark mode ===== */
-.dark {
-  --background: #0a0a0a;
-  --foreground: #f5f5f5;
-
-  --card: #111111;
-  --card-foreground: #f5f5f5;
-
-  --popover: #111111;
-  --popover-foreground: #f5f5f5;
-
-  --primary: var(--uap-blue);
-  --primary-foreground: #ffffff;
-
-  --secondary: var(--uap-yellow);
-  --secondary-foreground: #0a0a0a;
-
-  --accent: color-mix(in oklab, var(--uap-yellow) 30%, #1a1a1a 70%);
-  --accent-foreground: #ffffff;
-
-  --muted: #1a1a1a;
-  --muted-foreground: color-mix(in oklab, var(--uap-gray) 65%, white 35%);
-
-  --destructive: #ef4444;
-
-  --border: color-mix(in oklab, var(--uap-gray) 25%, #0a0a0a 75%);
-  --input: color-mix(in oklab, var(--uap-gray) 25%, #0a0a0a 75%);
-  --ring: color-mix(in oklab, var(--uap-blue) 70%, #0a0a0a 30%);
-
-  --chart-1: var(--uap-blue);
-  --chart-2: #2a6aa3;
-  --chart-3: var(--uap-yellow);
-  --chart-4: #b89f00;
-  --chart-5: var(--uap-gray);
-
-  --sidebar: #111111;
-  --sidebar-foreground: #f5f5f5;
-  --sidebar-primary: var(--uap-blue);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: color-mix(in oklab, var(--uap-yellow) 25%, #111111 75%);
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: color-mix(in oklab, var(--uap-gray) 30%, #111111 70%);
-  --sidebar-ring: color-mix(in oklab, var(--uap-blue) 70%, #0a0a0a 30%);
-}
-
-/* ===== Base layer ===== */
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+body {
+  @apply bg-background text-foreground;
 }
