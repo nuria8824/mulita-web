@@ -1,40 +1,13 @@
 // src/app/page.tsx
+import { SeccionProductos } from "@/components/SeccionProductos";
+import { SeccionNoticias } from "@/components/ui/SeccionNoticias";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
-  // Noticias breves (divulgación pública basada en la ERS)
-  const posts = [
-    {
-      id: 1,
-      title: "¿Qué es Mulita?",
-      excerpt:
-        "Un robot educativo impreso en 3D para aprender robótica en primaria y secundaria, dentro de una plataforma web con info, comunidad y tienda.",
-      date: "Conocé el proyecto",
-    },
-    {
-      id: 2,
-      title: "Comunidad docente",
-      excerpt:
-        "Registrate para subir actividades, organizar recursos por materias y niveles, comentar y dar “me gusta”. Colaboramos entre escuelas.",
-      date: "Únete",
-    },
-    {
-      id: 3,
-      title: "Multilenguaje",
-      excerpt:
-        "La web está pensada para Argentina, Brasil y EE. UU.: disponible en español, portugués e inglés para una comunidad internacional.",
-      date: "Idiomas",
-    },
-  ];
+  
 
-  // Productos destacados (muestra pública)
-  const products = [
-    { id: 1, name: "Kit Educativo Mulita (completo)", price: "89.00" },
-    { id: 2, name: "Piezas individuales (chasis, ruedas, etc.)", price: "Desde 5.00" },
-    { id: 3, name: "Sensores y accesorios compatibles", price: "39.00" },
-    { id: 4, name: "Repuestos rápidos", price: "12.00" },
-  ];
+  
 
   return (
     <>
@@ -143,95 +116,11 @@ export default function HomePage() {
       </section>
 
       {/* NOTICIAS */}
-      <section className="mt-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-center">Noticias</h2>
-          <p className="text-center text-muted-foreground mt-2">
-            Comunidad, experiencias en escuelas y mejoras de la plataforma.
-          </p>
+      <SeccionNoticias />
 
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((p) => (
-              <article
-                key={p.id}
-                className="rounded-xl border border-light bg-card p-5 hover:shadow-sm transition"
-              >
-                <div className="aspect-video rounded-lg bg-muted/70 grid place-items-center text-sm text-muted-foreground">
-                  📄
-                </div>
-                <h3 className="mt-4 font-semibold">{p.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground line-clamp-3">
-                  {p.excerpt}
-                </p>
-                <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-                  <span>{p.date}</span>
-                  <Link href={`/noticias/${p.id}`} className="text-primary font-medium">
-                    Leer más →
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/noticias"
-              className="btn btn--blue"
-            >
-              Ver todas las noticias
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* PRODUCTOS DESTACADOS */}
-      <section className="mt-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-center">
-            Productos Destacados
-          </h2>
-          <p className="text-center text-muted-foreground mt-2">
-            Todo lo necesario para implementar Mulita en tu institución.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((p) => (
-              <div
-                key={p.id}
-                className="rounded-xl border border-light bg-card p-5 flex flex-col"
-              >
-                <div className="aspect-square rounded-lg bg-muted/70 grid place-items-center text-sm text-muted-foreground">
-                  🛒
-                </div>
-                <div className="mt-4 flex-1">
-                  <h3 className="font-semibold">{p.name}</h3>
-                </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="font-bold">${p.price}</span>
-                  <div className="flex gap-2">
-                    <button className="btn btn--yellow btn-sm">
-                      Comprar
-                    </button>
-                    <button className="btn btn--outline btn-sm">
-                      Detalle
-                    </button>
-
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 flex justify-center">
-            <Link
-              href="/tienda"
-              className="btn btn--blue"
-            >
-              Ver todos los productos
-            </Link>
-          </div>
-        </div>
-      </section>
+      <SeccionProductos />
 
       {/* FAQ breve / CTA final */}
       <section className="mt-24 mb-16">
