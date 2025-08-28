@@ -24,7 +24,7 @@ export type Usuario = {
     email: string;
     telefono: string;
     contraseñaHash: string;
-    rol: 'superAdmin' | 'admin' | 'docente' | 'estudiante';
+    rol: 'superAdmin' | 'admin' | 'docente' | 'usuario';
     institucion?: string;
     pais?: string;
     provincia?: string;

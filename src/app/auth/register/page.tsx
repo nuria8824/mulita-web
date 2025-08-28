@@ -18,7 +18,7 @@ export default function RegisterPage() {
       email: formData.get("email")?.toString() ?? "",
       telefono: formData.get("telefono")?.toString() ?? "",
       contrasena: formData.get("contrasena")?.toString() ?? "",
-      docente: formData.get("docente") === "on",
+      rol: esDocente ? "docente" : "usuario",
       institucion: formData.get("institucion")?.toString() ?? "",
       pais: formData.get("pais")?.toString() ?? "",
       provincia: formData.get("provincia")?.toString() ?? "",

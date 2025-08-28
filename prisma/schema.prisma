@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Rol {
+  superAdmin
+  admin
+  docente
+  usuario
+}
+
+model Usuario {
+  id          String   @id @default(uuid())
+  nombre      String
+  apellido    String
+  email       String   @unique
+  telefono    String
+  contrasena  String
+  rol         Rol      @default(usuario)
+  institucion String?
+  pais        String?
+  provincia   String?
+  ciudad      String?
+  createdAt   DateTime @default(now())
+}
+
+

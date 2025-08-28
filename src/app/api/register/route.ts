@@ -1,58 +1,78 @@
 // src/app/api/register/route.ts
 import { NextResponse } from "next/server";
-import { database } from "@/app/db/connections";
-import { randomUUID } from "crypto";
+import { prisma } from "@/lib/prisma"; // tu cliente Prisma
 import bcrypt from "bcrypt";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
     const {
       nombre,
       apellido,
       email,
       telefono,
       contrasena,
-      docente,
+      docente, // checkbox para rol de docente
+      rol, // enviamos el rol directamente desde el formulario
       institucion,
       pais,
       provincia,
       ciudad,
     } = body;
 
-    if (!nombre || !apellido || !email || !contrasena) {
+    // Validación básica
+    if (!nombre || !apellido || !email || !telefono || !contrasena) {
       return NextResponse.json(
         { success: false, message: "Faltan campos obligatorios" },
         { status: 400 }
       );
     }
 
+    // Hasheo de contraseña
     const hashedPassword = await bcrypt.hash(contrasena, 10);
-    const id = randomUUID();
 
-    await database.run(
-      `INSERT INTO usuarios 
-      (id, nombre, apellido, email, telefono, contrasena, docente, institucion, pais, provincia, ciudad) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [
-        id,
+    // Crear usuario en la base de datos con Prisma
+    const usuario = await prisma.usuario.create({
+      data: {
         nombre,
         apellido,
         email,
-        telefono || null,
-        hashedPassword,
-        docente ? 1 : 0,
-        institucion || null,
-        pais || null,
-        provincia || null,
-        ciudad || null,
-      ]
-    );
+        telefono: telefono || null,
+        contrasena: hashedPassword,
+        rol: docente ? "docente" : "usuario", // asignar rol basado en el checkbox
+        institucion: institucion || null,
+        pais: pais || null,
+        provincia: provincia || null,
+        ciudad: ciudad || null,
+      },
+    });
 
-    return NextResponse.json({ success: true, message: "Usuario creado correctamente" });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ success: false, message: "Error al crear el usuario" }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      message: "Usuario creado correctamente",
+      usuario: {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        apellido: usuario.apellido,
+        email: usuario.email,
+        telefono: usuario.telefono,
+        rol: usuario.rol,
+      },
+    });
+  } catch (error: any) {
+    console.error(error);
+
+    // Manejo de error por email duplicado (Prisma)
+    if (error.code === "P2002") {
+      return NextResponse.json(
+        { success: false, message: "El email ya está registrado" },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: false, message: "Error al crear el usuario" },
+      { status: 500 }
+    );
   }
 }

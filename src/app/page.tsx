@@ -1,5 +1,5 @@
 // src/app/page.tsx
-import { SeccionProductos } from "@/components/SeccionProductos";
+import { SeccionProductos } from "@/components/ui/SeccionProductos";
 import { SeccionNoticias } from "@/components/ui/SeccionNoticias";
 import Image from "next/image";
 import Link from "next/link";
