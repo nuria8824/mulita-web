@@ -1,8 +1,8 @@
-// src/app/layout.tsx
-import { HeaderSinAuth } from "@/components/ui/HeaderSinAuth";
+import Header from "@/components/ui/Header";
 import "./globals.css";
 import Link from "next/link";
 import { Footer } from "@/components/ui/Footer";
+import { UserProvider } from "@/context/UserContext";
 
 export const metadata = {
   title: "Mulita",
@@ -13,12 +13,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className="">
       <body className="bg-background text-foreground">
-        {/* Top bar */}
-        <HeaderSinAuth />
+        <UserProvider>
+          {/* Top bar */}
+          <Header />
 
-        <main>{children}</main>
+          <main>{children}</main>
+          <Footer />
+        </UserProvider>
 
-        <Footer />
       </body>
     </html>
   );

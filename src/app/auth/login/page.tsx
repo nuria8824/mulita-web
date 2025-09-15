@@ -1,30 +1,44 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [contrasena, setContrasena] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { setUser } = useUser();
 
-  const onContinuarClick = useCallback(async () => {
+  const onContinuarClick = async () => {
     setError("");
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, contrasena }),
+        credentials: "include", // ✅ Importante para enviar cookies
+      });
 
-    if (res?.error) {
-      setError("Credenciales incorrectas");
-    } else {
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setError("Credenciales incorrectas");
+        return;
+      }
+
+      // Actualizamos el contexto del usuario
+      setUser(data.user);
+
+      // Redirigimos al inicio
       router.push("/");
+    } catch (err) {
+      console.error(err);
+      setError("Error en el servidor");
     }
-  }, [email, password, router]);
+  };
 
   const inputClass =
     "w-full shadow-[0_4px_4px_rgba(0,0,0,0.25)] rounded-lg border border-gray-300 h-10 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600";
@@ -59,17 +73,24 @@ export default function Login() {
             type="password"
             placeholder="contraseña"
             className={inputClass}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
           />
         </div>
 
         {error && <p className="text-red-500">{error}</p>}
 
-        <div className={buttonClass} onClick={onContinuarClick}>
-          <span className="font-medium text-white leading-[150%]">
-            Continuar
-          </span>
+        <div className="w-full">
+          <button
+            type="button"
+            className={buttonClass}
+            onClick={onContinuarClick}
+            disabled={!email || !contrasena}
+          >
+            <span className="font-medium text-white leading-[150%]">
+              Continuar
+            </span>
+          </button>
         </div>
       </div>
     </div>

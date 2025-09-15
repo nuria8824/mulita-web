@@ -1,13 +1,34 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// prisma/schema.prisma
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+model Usuario {
+  id         String   @id @default(cuid())
+  nombre     String
+  apellido   String
+  email      String   @unique
+  telefono   String
+  contrasena String
+  rol        Rol      @default(usuario)
+  createdAt  DateTime @default(now())
+  docente    Docente?
+  imagen     String?
+}
+
+model Docente {
+  id          String  @id @default(cuid())
+  usuarioId   String  @unique
+  institucion String?
+  pais        String?
+  provincia   String?
+  ciudad      String?
+  usuario     Usuario @relation(fields: [usuarioId], references: [id])
 }
 
 enum Rol {
@@ -16,20 +37,3 @@ enum Rol {
   docente
   usuario
 }
-
-model Usuario {
-  id          String   @id @default(uuid())
-  nombre      String
-  apellido    String
-  email       String   @unique
-  telefono    String
-  contrasena  String
-  rol         Rol      @default(usuario)
-  institucion String?
-  pais        String?
-  provincia   String?
-  ciudad      String?
-  createdAt   DateTime @default(now())
-}
-
-
