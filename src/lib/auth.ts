@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { verify } from "jsonwebtoken";
+import { NextRequest } from "next/server";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
 
@@ -18,3 +19,25 @@ export const signToken = (payload: object) =>
 // Verificar JWT
 export const verifyToken = (token: string) =>
   jwt.verify(token, JWT_SECRET);
+
+
+export function getUserFromRequest(req: NextRequest) {
+  const token = req.cookies.get("token")?.value;
+  if (!token) return null;
+
+  try {
+    const payload = verify(token, JWT_SECRET) as { id: number; rol: string };
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+export function requireAdmin(req: NextRequest) {
+  const user = getUserFromRequest(req);
+  console.log("User from token:", user);
+  if (!user || (user.rol !== "admin" && user.rol !== "superAdmin")) {
+    throw new Error("No tienes permisos");
+  }
+  return user;
+}

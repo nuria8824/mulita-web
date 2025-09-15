@@ -37,3 +37,15 @@ enum Rol {
   docente
   usuario
 }
+
+model Noticia {
+  id                Int      @id @default(autoincrement())
+  titulo            String
+  autor             String
+  introduccion      String
+  imagenPrincipal   String
+  descripcion       String
+  archivo           String?
+  createdAt         DateTime @default(now())
+}
+

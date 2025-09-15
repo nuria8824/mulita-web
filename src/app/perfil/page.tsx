@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface UserData {
   id: string;
@@ -11,6 +11,7 @@ interface UserData {
 export default function Perfil() {
   const [user, setUser] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -68,7 +69,7 @@ export default function Perfil() {
             method: "POST", 
             credentials: "include"
           });
-          window.location.href = "/"; // redirige al home
+          router.push("/"); // redirige al home
         }}
         className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 cursor-pointer"
       >
