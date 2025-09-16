@@ -1,32 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useUser } from "@/context/UserContext";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
-  const { user, setUser, logout } = useUser();
+  const { user, logout } = useUser();
   const [dropDownOpen, setDropDownOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch("/api/auth/me", {
-          method: "GET",
-          credentials: "include",
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data.user);
-        } else {
-          setUser(null);
-        }
-      } catch (err) {
-        setUser(null);
-      }
-    };
-    fetchUser();
-  }, [setUser]);
+  const router = useRouter();
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-light">
@@ -72,11 +54,16 @@ export default function Header() {
               <div className="absolute right-0 hidden group-hover:block mt-2 w-48 bg-white border rounded-lg shadow-lg py-2 z-50">
                 <Link href="/perfil" className="block px-4 py-2 text-sm hover:bg-muted">Perfil</Link>
                 <Link href="/configuracion" className="block px-4 py-2 text-sm hover:bg-muted">Configuración</Link>
-                <form action="/api/auth/logout" method="post">
-                  <button type="submit" onClick={logout} className="block w-full text-left px-4 py-2 text-sm hover:bg-muted">
+                  <button
+                  type="submit"
+                  onClick={async () => {
+                    await logout();
+                  router.push("/");
+                  }}
+                  className="block w-full text-left px-4 py-2 text-sm hover:bg-muted"
+                  >
                     Salir
                   </button>
-                </form>
               </div>
             </div>
           )}

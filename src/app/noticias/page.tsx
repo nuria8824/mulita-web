@@ -16,15 +16,22 @@ interface Noticia {
 }
 
 export default function NoticiasPage() {
-  const { user } = useUser();
+  const { user, loading: userLoading } = useUser();
   const [noticias, setNoticias] = useState<Noticia[]>([]);
+  const [loadingNoticias, setLoadingNoticias] = useState(true);
 
   // Traer noticias desde la API
   useEffect(() => {
     const fetchNoticias = async () => {
-      const res = await fetch("/api/noticias");
-      const data = await res.json();
-      setNoticias(data.noticias.reverse()); // Las más recientes primero
+      try {
+        const res = await fetch("/api/noticias");
+        const data = await res.json();
+        setNoticias(data.noticias.reverse()); // Las más recientes primero
+      } catch (err) {
+        console.error("Error fetching noticias:", err);
+      } finally {
+        setLoadingNoticias(false);
+      }
     };
     fetchNoticias();
   }, []);
@@ -32,9 +39,17 @@ export default function NoticiasPage() {
   const handleEliminar = async (id: number) => {
     if (!confirm("¿Seguro que quieres eliminar esta noticia?")) return;
 
-    await fetch(`/api/noticias/${id}`, { method: "DELETE" });
-    setNoticias((prev) => prev.filter((n) => n.id !== id));
+    try {
+      await fetch(`/api/noticias/${id}`, { method: "DELETE" });
+      setNoticias((prev) => prev.filter((n) => n.id !== id));
+    } catch (err) {
+      console.error("Error eliminando noticia:", err);
+    }
   };
+
+  if (userLoading || loadingNoticias) {
+    return <p className="text-center mt-10">Cargando noticias...</p>;
+  }
 
   return (
     <div className="w-full bg-white overflow-hidden flex flex-col items-center justify-start py-0 px-4 md:px-16 lg:px-24 gap-[41px]">

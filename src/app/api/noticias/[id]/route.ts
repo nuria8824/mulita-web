@@ -23,10 +23,28 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
 // PATCH: editar una noticia existente
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const user = requireAdmin(req);
+  requireAdmin(req);
 
-  const { id } = params;
-  const { titulo, autor, introduccion, descripcion, imagenPrincipal, archivo } = await req.json();
+  const url = new URL(req.url);
+  const id = url.pathname.split("/").pop();
+  if (!id) {
+    return NextResponse.json({ error: "ID de noticia es requerido" }, { status: 400 });
+  }
+
+  const formData = await req.formData();
+  const titulo = formData.get("titulo")?.toString() || "";
+  const autor = formData.get("autor")?.toString() || "";
+  const introduccion = formData.get("introduccion")?.toString() || "";
+  const descripcion = formData.get("descripcion")?.toString() || "";
+  const imagenPrincipalFile = formData.get("imagenPrincipal") as File | null;
+  const archivoFile = formData.get("archivo") as File | null;
+
+  if (!titulo || !autor || !introduccion || !descripcion || !imagenPrincipalFile) {
+    return NextResponse.json({ error: "Faltan campos obligatorios" }, { status: 400 });
+  }
+
+  const imagenPrincipal = imagenPrincipalFile?.name;
+  const archivo = archivoFile?.name || null;
 
   const noticia = await prisma.noticia.update({
     where: { id: Number(id) },

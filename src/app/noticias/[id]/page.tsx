@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { set } from "zod";
 
 interface Noticia {
   id: number;

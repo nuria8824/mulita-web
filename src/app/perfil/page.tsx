@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
 interface UserData {
   id: string;
@@ -9,33 +9,8 @@ interface UserData {
 }
 
 export default function Perfil() {
-  const [user, setUser] = useState<UserData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const {user, logout, loading } = useUser();
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch("/api/auth/me", { 
-          method: "GET", 
-          credentials: "include"
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data.user);
-        } else {
-          setUser(null);
-        }
-      } catch (err) {
-        console.error("Error obteniendo usuario:", err);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   if (loading) {
     return <p className="text-center mt-10">Cargando perfil...</p>;
@@ -65,10 +40,7 @@ export default function Perfil() {
 
       <button
         onClick={async () => {
-          await fetch("/api/auth/logout", { 
-            method: "POST", 
-            credentials: "include"
-          });
+          await logout();
           router.push("/"); // redirige al home
         }}
         className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 cursor-pointer"
