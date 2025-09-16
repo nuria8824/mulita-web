@@ -26,7 +26,7 @@ export function getUserFromRequest(req: NextRequest) {
   if (!token) return null;
 
   try {
-    const payload = verify(token, JWT_SECRET) as { id: number; rol: string };
+    const payload = verify(token, JWT_SECRET) as { id: string; rol: string };
     return payload;
   } catch {
     return null;

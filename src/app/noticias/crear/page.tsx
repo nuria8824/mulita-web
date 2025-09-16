@@ -28,11 +28,6 @@ export default function CrearNoticiaPage() {
     }
     formData.append("imagenPrincipal", imagenPrincipal);
 
-    if (!imagenPrincipal) {
-      alert("La imagen principal es obligatoria.");
-      return;
-    }
-
     const res = await fetch("/api/noticias", {
       method: "POST",
       body: formData,
@@ -98,16 +93,19 @@ export default function CrearNoticiaPage() {
           </div>
 
           {/* Imagen principal */}
-          <div>
-            <label className="block text-lg font-semibold mb-2">Imagen Principal</label>
-            <input
-              type="file"
-              placeholder="Imagen Principal"
-              onChange={(e) => setImagenPrincipal(e.target.files?.[0] || null)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 cursor-pointer text-gray-600"
-              accept="image/*"
-              required
-            />
+          <div className="flex flex-col gap-2">
+            <label className="font-semibold text-lg">Imagen Principal</label>
+            <label className="w-full h-32 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:bg-gray-100 transition">
+              <span className="text-gray-500">Sube archivos desde tu dispositivo</span>
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => setImagenPrincipal(e.target.files?.[0] || null)}
+                accept="image/*"
+                required
+              />
+            </label>
+            {imagenPrincipal && <p className="text-sm text-gray-600 mt-1">Archivo seleccionado: {imagenPrincipal.name}</p>}
           </div>
 
           {/* Descripción */}
@@ -123,14 +121,17 @@ export default function CrearNoticiaPage() {
           </div>
 
           {/* Archivos/Imágenes extra */}
-          <div>
-            <label className="block text-lg font-semibold mb-2">Archivos/Imágenes</label>
-            <input
-              type="file"
-              placeholder="Archivos/Imágenes"
-              onChange={(e) => setArchivo(e.target.files?.[0] || null)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 cursor-pointer text-gray-600"
-            />
+          <div className="flex flex-col gap-2">
+            <label className="font-semibold text-lg">Archivos</label>
+            <label className="w-full h-32 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:bg-gray-100 transition">
+              <span className="text-gray-500">Sube archivos desde tu dispositivo</span>
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => setArchivo(e.target.files?.[0] || null)}
+              />
+            </label>
+            {archivo && <p className="text-sm text-gray-600 mt-1">Archivo seleccionado: {archivo.name}</p>}
           </div>
 
           {/* Botón */}
